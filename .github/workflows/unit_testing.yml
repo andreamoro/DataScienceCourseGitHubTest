@@ -5,9 +5,9 @@ name: Alterenate Testing Branch
 
 on:
   push:
-    branches: [ Alternate_Testing_Approach ]
+    branches: [ Create_Unit_Testing ]
   pull_request:
-    branches: [ Alternate_Testing_Approach ]
+    branches: [ Create_Unit_Testing ]
 
 jobs:
   build:

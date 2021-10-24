@@ -1,2 +1,4 @@
+.gitignore
+.github/workflows/unit_testing.yml
 .vscode/
 __pycache__/
