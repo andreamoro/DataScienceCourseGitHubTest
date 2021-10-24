@@ -13,8 +13,8 @@ def yesterday() -> datetime.date:
 def tomorrow() -> datetime.date:
     return today() + timedelta(days=1)
 
-def some_other_day(number_of_days) -> datetime.date:
-    return today() + timedelta(days=number_of_days)
+def some_other_day(number_of_days: int, start_date: datetime.date = today()) -> datetime.date:
+    return start_date + timedelta(days=number_of_days)
 
 class TestDuration(unittest.TestCase):
     # Wrapping all tests about the duration in a single class
@@ -71,7 +71,7 @@ class TestDuration(unittest.TestCase):
             # self.log.error(f"{test.start, test.end}")
 
     def test_wrong_input(self):
-        # This test is expected to fail, but this is something I know
+        # This test is expected to FAIL, but this is something I know
         # only because I lookeed at the source code.
         # In a real "black/box" model this is something that should 
         # be clear via the document implementation or the method signature
@@ -106,3 +106,19 @@ class TestDuration(unittest.TestCase):
             except TypeError as exc:                
                 self.log.error(f"Error {exc}")
                 self.log.info(f"The argument passed were: {test.start, test.end}")
+
+class TestWhen(unittest.TestCase):
+    def test_future_date(self):
+        # This test aims to verify the expected date after the days addition.
+        test = NamedTuple('Dates', [
+            ('start', datetime.date), 
+            ('days', int), 
+            ('expected_return', datetime.date)
+        ])
+        tests = [
+            test(some_other_day(0, dt(2021,10,23)), 7, dt(2021,10,30))
+        ]
+
+        for test in tests:
+            ret = when(test.start, test.days)
+            self.assertEqual(ret, test.expected_return)
