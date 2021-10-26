@@ -71,7 +71,6 @@ class TestDuration(unittest.TestCase):
             # self.log.error(f"{test.start, test.end}")
 
     def test_wrong_input(self):
-        # This test is expected to FAIL, but this is something I know
         # only because I lookeed at the source code.
         # In a real "black/box" model this is something that should 
         # be clear via the document implementation or the method signature
@@ -115,8 +114,9 @@ class TestWhen(unittest.TestCase):
             ('days', int), 
             ('expected_return', datetime.date)
         ])
+
         tests = [
-            test(some_other_day(0, dt(2021,10,23)), 7, dt(2021,10,30))
+            test(some_other_day(0, dt(2021, 10, 23)), 7, dt(2021, 10, 30))
         ]
 
         for test in tests:
